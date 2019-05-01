@@ -1,6 +1,7 @@
 #include "ShaderManager.h"
 #include <vector>
 #include <fstream>
+#include "FileLoader.h"
 
 
 ShaderManager::ShaderManager()
@@ -12,10 +13,10 @@ ShaderManager::~ShaderManager()
 {
 }
 
-void ShaderManager::loadVertexShader(std::string t_file_name)
+void ShaderManager::loadVertexShader(const char* t_filename)
 {
-	std::ifstream t(t_file_name);
-	std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+	FileLoader fileLoader;
+	auto str = fileLoader.loadFileToString(t_filename);
 	char const * vertexSourcePointer = str.c_str();
 
 	m_vertex_id = glCreateShader(GL_VERTEX_SHADER);
@@ -23,10 +24,10 @@ void ShaderManager::loadVertexShader(std::string t_file_name)
 	glCompileShader(m_vertex_id);
 }
 
-void ShaderManager::loadFragmentShader(std::string t_file_name)
+void ShaderManager::loadFragmentShader(const char* t_filename)
 {
-	std::ifstream t(t_file_name);
-	std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+	FileLoader fileLoader;
+	auto str = fileLoader.loadFileToString(t_filename);
 	char const * fragmentSourcePointer = str.c_str();
 
 	m_fragment_id = glCreateShader(GL_FRAGMENT_SHADER);
@@ -50,6 +51,8 @@ void ShaderManager::bindPrograms()
 		glGetProgramInfoLog(m_program_id, infoLogLength, nullptr, &ProgramErrorMessage[0]);
 		printf("%s\n", &ProgramErrorMessage[0]);
 	}
+
+	glUseProgram(m_program_id);
 
 	glDetachShader(m_program_id, m_vertex_id);
 	glDetachShader(m_program_id, m_fragment_id);

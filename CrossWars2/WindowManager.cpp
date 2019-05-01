@@ -3,6 +3,7 @@
 #include "SDLHelpers.h"
 #include <GLEW/glew.h>
 #include "ModelData.h"
+#include "Defines.h"
 
 WindowManager::WindowManager()
 {
@@ -43,15 +44,6 @@ WindowManager::WindowManager()
 
 WindowManager::~WindowManager()
 {
-}
-
-void WindowManager::renderObject(ModelData* t_model_data)
-{
-	glBindVertexArray(t_model_data->getVaoId());
-	glEnableVertexAttribArray(0);
-	glDrawArrays(GL_TRIANGLES, 0, t_model_data->getVertexCount());
-	glDisableVertexAttribArray(0);
-	glBindVertexArray(0);
 }
 
 void WindowManager::cleanUp()

@@ -2,15 +2,12 @@
 #include <SDL/SDL.h>
 #include "Singleton.h"
 
-class ModelData;
-
 class WindowManager : public TSingleton<WindowManager>
 {
 public:
 	WindowManager();
 	~WindowManager();
 
-	void renderObject(ModelData* t_model_data);
 	void cleanUp();
 
 	SDL_Window* getRenderWindow();

@@ -8,8 +8,8 @@ public:
 	ShaderManager();
 	~ShaderManager();
 
-	void loadVertexShader(std::string t_file_name);
-	void loadFragmentShader(std::string t_file_name);
+	void loadVertexShader(const char* t_filename);
+	void loadFragmentShader(const char* t_filename);
 	void bindPrograms();
 
 	GLuint getProgramID();

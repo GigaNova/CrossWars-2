@@ -19,8 +19,11 @@
     <Filter Include="Engine\Managers">
       <UniqueIdentifier>{e17def52-8aa0-4f77-8dc5-251f90b7fe3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models">
+    <Filter Include="Engine\Models">
       <UniqueIdentifier>{0856ec7e-436a-435d-9d56-62df6322f0db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{f6c085c8-80d9-422f-88c9-0257f5352c52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,12 +37,18 @@
       <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="ModelData.cpp">
-      <Filter>Models</Filter>
+      <Filter>Engine\Models</Filter>
     </ClCompile>
     <ClCompile Include="ModelManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,19 +62,25 @@
     <ClInclude Include="WindowManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="SDLHelpers.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="ModelData.h">
-      <Filter>Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Defines.h">
-      <Filter>Header Files</Filter>
+      <Filter>Engine\Models</Filter>
     </ClInclude>
     <ClInclude Include="ModelManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLHelpers.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
   </ItemGroup>
