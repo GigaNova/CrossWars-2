@@ -17,6 +17,6 @@ public:
 	bool isRunning();
 private:
 	bool m_is_running;
-	ModelData* m_model;
+	Model* m_model;
 };
 

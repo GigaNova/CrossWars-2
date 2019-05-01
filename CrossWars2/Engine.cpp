@@ -5,6 +5,7 @@
 #include "Defines.h"
 #include "ShaderManager.h"
 #include "RenderManager.h"
+#include "StandardShader.h"
 
 Engine::Engine()
 {
@@ -13,23 +14,9 @@ Engine::Engine()
 	auto shaderManager = ShaderManager::GetInstance();
 	auto renderManager = RenderManager::GetInstance();
 
-	std::vector<GLfloat> vertices = {
-		-0.5f, 0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.5f, 0.5f, 0.0f
-	};
+	auto shader = new StandardShader();
 
-	std::vector<GLint> indices = {
-		0,1,3,
-		3,1,2
-	};
-
-	shaderManager->loadVertexShader("..\\Assets\\Shaders\\vertexShader.vert");
-	shaderManager->loadFragmentShader("..\\Assets\\Shaders\\fragmentShader.frag");
-	shaderManager->bindPrograms();
-
-	m_model = modelManager->loadModelToVao(vertices, indices);
+	m_model = modelManager->loadModel();
 
 	m_is_running = true;
 }
@@ -65,15 +52,15 @@ void Engine::update()
 
 void Engine::render()
 {
-	auto pWindow = WindowManager::GetInstance()->getRenderWindow();
+	auto window = WindowManager::GetInstance()->getRenderWindow();
 
-	glClearColor(0.0, 1.0, 0.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0, 512, 512);
 
 	RenderManager::GetInstance()->renderObject(m_model);
 
-	SDL_GL_SwapWindow(pWindow);
+	SDL_GL_SwapWindow(window);
 }
 
 void Engine::cleanUp()

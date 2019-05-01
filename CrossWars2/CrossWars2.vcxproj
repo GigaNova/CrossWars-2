@@ -98,7 +98,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\styn2\Documents\Repos\CrossWars-2\CrossWars2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL/SDL2.lib;SDL/SDL2main.lib;GLEW/glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL/SDL2.lib;SDL/SDL2main.lib;GLEW/glew32.lib;opengl32.lib;lodepng/SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -158,22 +158,33 @@
     <ClCompile Include="CrossWars2.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="FileLoader.cpp" />
+    <ClCompile Include="MathHelper.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelData.cpp" />
     <ClCompile Include="ModelManager.cpp" />
+    <ClCompile Include="ProtoShader.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="StandardShader.cpp" />
+    <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="FileLoader.h" />
+    <ClInclude Include="FileTypes.h" />
+    <ClInclude Include="MathHelper.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="ModelData.h" />
     <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="ProtoShader.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="SDLHelpers.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="StandardShader.h" />
+    <ClInclude Include="TextureData.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

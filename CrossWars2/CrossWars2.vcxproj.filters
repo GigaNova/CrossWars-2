@@ -25,6 +25,9 @@
     <Filter Include="Helpers">
       <UniqueIdentifier>{f6c085c8-80d9-422f-88c9-0257f5352c52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Shaders">
+      <UniqueIdentifier>{bbe3bacd-3d24-42b9-b037-828ccd4b0ab0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossWars2.cpp">
@@ -45,11 +48,26 @@
     <ClCompile Include="ShaderManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="FileLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLoader.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtoShader.cpp">
+      <Filter>Engine\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardShader.cpp">
+      <Filter>Engine\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureData.cpp">
+      <Filter>Engine\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Engine\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="MathHelper.cpp">
+      <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +95,29 @@
     <ClInclude Include="SDLHelpers.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="FileLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RenderManager.h">
       <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLoader.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTypes.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtoShader.h">
+      <Filter>Engine\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardShader.h">
+      <Filter>Engine\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureData.h">
+      <Filter>Engine\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Engine\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="MathHelper.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
