@@ -2,6 +2,8 @@
 #include "Singleton.h"
 #include "ModelManager.h"
 #include <GLEW/glew.h>
+#include "StandardShader.h"
+#include "BaseEntity.h"
 
 class Engine : public TSingleton<Engine>
 {
@@ -18,5 +20,8 @@ public:
 private:
 	bool m_is_running;
 	Model* m_model;
+
+	StandardShader* m_shader;
+	BaseEntity* m_entity;
 };
 

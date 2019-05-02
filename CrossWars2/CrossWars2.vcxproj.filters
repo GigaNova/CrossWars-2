@@ -28,6 +28,12 @@
     <Filter Include="Engine\Shaders">
       <UniqueIdentifier>{bbe3bacd-3d24-42b9-b037-828ccd4b0ab0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2068ccfd-00d4-439d-86d0-e6ae4c56fcbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities">
+      <UniqueIdentifier>{014a9b09-72c4-454d-90c4-3f0e55cc0b0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossWars2.cpp">
@@ -68,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="MathHelper.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEntity.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="MathHelper.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntity.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

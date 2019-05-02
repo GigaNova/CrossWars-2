@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL/SDL.h>
 #include "Singleton.h"
+#include "Camera.h"
 
 class WindowManager : public TSingleton<WindowManager>
 {
@@ -10,9 +11,12 @@ public:
 
 	void cleanUp();
 
+	Camera* getCamera();
 	SDL_Window* getRenderWindow();
 private:
 	const char* game_name = "Cross Wars 2";
+
+	Camera* m_camera;
 
 	SDL_Window* m_main_window;
 	SDL_GLContext m_main_context;

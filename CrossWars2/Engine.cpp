@@ -14,9 +14,10 @@ Engine::Engine()
 	auto shaderManager = ShaderManager::GetInstance();
 	auto renderManager = RenderManager::GetInstance();
 
-	auto shader = new StandardShader();
+	m_shader = new StandardShader();
 
 	m_model = modelManager->loadModel();
+	m_entity = new BaseEntity(m_model, glm::vec3(0, 0, -1.f), glm::vec3(0, 0, 0), 1);
 
 	m_is_running = true;
 }
@@ -33,8 +34,7 @@ void Engine::getInput()
 	while(SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
-		case SDL_KEYUP:
-			std::cout << "MEME" << std::endl;
+			WindowManager::GetInstance()->getCamera()->move(&event.key);
 			break;
 		case SDL_QUIT:
 			m_is_running = false;;
@@ -47,7 +47,7 @@ void Engine::getInput()
 
 void Engine::update()
 {
-
+	m_entity->rotate(glm::vec3(0, 1, 0));
 }
 
 void Engine::render()
@@ -58,7 +58,7 @@ void Engine::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0, 512, 512);
 
-	RenderManager::GetInstance()->renderObject(m_model);
+	RenderManager::GetInstance()->renderEntity(m_entity, m_shader);
 
 	SDL_GL_SwapWindow(window);
 }

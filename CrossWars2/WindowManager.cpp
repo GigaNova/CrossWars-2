@@ -43,6 +43,7 @@ WindowManager::WindowManager()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
+	m_camera = new Camera();
 }
 
 
@@ -60,4 +61,9 @@ void WindowManager::cleanUp()
 SDL_Window* WindowManager::getRenderWindow()
 {
 	return m_main_window;
+}
+
+Camera* WindowManager::getCamera()
+{
+	return m_camera;
 }

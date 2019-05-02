@@ -3,12 +3,16 @@
 #include "GLEW/glew.h"
 #include <GLM/vec3.hpp>
 #include <GLM/fwd.hpp>
+#include "ProtoShader.h"
 
 class ShaderManager : public TSingleton<ShaderManager>
 {
 public:
 	ShaderManager();
 	~ShaderManager();
+
+	void setActiveShader(ProtoShader* t_proto_shader);
+	ProtoShader* getActiveShader() const;
 
 	void loadVertexShader(const char* t_filename);
 	void loadFragmentShader(const char* t_filename);
@@ -28,5 +32,7 @@ private:
 	GLuint m_fragment_id;
 
 	GLuint m_program_id;
+
+	ProtoShader* m_loaded_shader;
 };
 

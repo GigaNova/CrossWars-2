@@ -14,6 +14,16 @@ ShaderManager::~ShaderManager()
 {
 }
 
+void ShaderManager::setActiveShader(ProtoShader* t_proto_shader)
+{
+	m_loaded_shader = t_proto_shader;
+}
+
+ProtoShader* ShaderManager::getActiveShader() const
+{
+	return m_loaded_shader;
+}
+
 void ShaderManager::loadVertexShader(const char* t_filename)
 {
 	FileLoader fileLoader;

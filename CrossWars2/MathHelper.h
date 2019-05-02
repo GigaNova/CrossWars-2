@@ -2,9 +2,13 @@
 #include <GLM/glm.hpp>
 #include <GLEW/glew.h>
 
+class Camera;
+
 class MathHelper
 {
 public:
-	static glm::mat4 createTransformationMatrix(glm::vec3 t_vector, GLfloat t_rx, GLfloat t_ry, GLfloat t_rz, float t_scale);
+	static glm::mat4 createTransformationMatrix(glm::vec3 t_vector, glm::vec3 t_rotation, float t_scale);
+	static glm::mat4 createViewMatrix(Camera * t_camera);
+	static glm::mat4 createProjectionMatrix();
 };
 
