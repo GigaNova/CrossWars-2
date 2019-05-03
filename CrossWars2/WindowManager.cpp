@@ -4,22 +4,24 @@
 #include <GLEW/glew.h>
 #include "ModelData.h"
 #include "Defines.h"
+#include "Logger.h"
 
 WindowManager::WindowManager()
 {
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		SDLHelpers::printSDLError("Unable to initialize.");
 	}
+
+	Logger::GetInstance()->logAction("SDL initialised.");
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 8);
@@ -37,11 +39,16 @@ WindowManager::WindowManager()
 
 	SDL_GL_MakeCurrent(m_main_window, m_main_context);
 
+	Logger::GetInstance()->logAction("OpenGL Context and Window created.");
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BACK);
+
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
+	Logger::GetInstance()->logAction("GLEW initialised.");
 
 	m_camera = new Camera();
 }

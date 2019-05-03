@@ -16,7 +16,7 @@ RenderManager::~RenderManager()
 {
 }
 
-void RenderManager::renderEntity(BaseEntity * t_entity, StandardShader* t_shader)
+void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 {
 	auto model = t_entity->getModel();
 	auto modelData = model->getModelData();
@@ -37,6 +37,10 @@ void RenderManager::renderEntity(BaseEntity * t_entity, StandardShader* t_shader
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureData->getTextureId());
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glDrawElements(GL_TRIANGLES, modelData->getVertexCount(), GL_UNSIGNED_INT, BUFFER_OFFSET(0));
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

@@ -4,6 +4,7 @@
 #include <GLEW/glew.h>
 #include <vector>
 #include "Model.h"
+#include "ObjFormatLoader.h"
 
 class ModelManager : public TSingleton<ModelManager>
 {
@@ -25,5 +26,7 @@ private:
 	std::vector<GLuint> m_vao_vector;
 	std::vector<GLuint> m_vbo_vector;
 	std::vector<GLuint> m_texture_vector;
+
+	ObjFormatLoader m_obj_loader;
 };
 

@@ -6,18 +6,23 @@
 #include "ShaderManager.h"
 #include "RenderManager.h"
 #include "StandardShader.h"
+#include "Logger.h"
 
 Engine::Engine()
 {
+	Logger::GetInstance()->logAction("Starting up...");
+
 	auto windowManager = WindowManager::GetInstance();
 	auto modelManager = ModelManager::GetInstance();
 	auto shaderManager = ShaderManager::GetInstance();
 	auto renderManager = RenderManager::GetInstance();
 
+	Logger::GetInstance()->logAction("All managers initiated.");
+
 	m_shader = new StandardShader();
 
 	m_model = modelManager->loadModel();
-	m_entity = new BaseEntity(m_model, glm::vec3(0, 0, -1.f), glm::vec3(0, 0, 0), 1);
+	m_entity = new BaseEntity(m_model, glm::vec3(0, 0, -10.f), glm::vec3(0, 0, 0), 1);
 
 	m_is_running = true;
 }
@@ -54,8 +59,8 @@ void Engine::render()
 {
 	auto window = WindowManager::GetInstance()->getRenderWindow();
 
-	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glViewport(0, 0, 512, 512);
 
 	RenderManager::GetInstance()->renderEntity(m_entity, m_shader);

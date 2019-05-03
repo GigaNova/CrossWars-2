@@ -2,9 +2,11 @@
 #include "Defines.h"
 #include <GLEW/glew.h>
 #include <lodepng/SOIL.h>
+#include "Logger.h"
+#include <experimental/filesystem>
 
 
-ModelManager::ModelManager()
+ModelManager::ModelManager() : m_obj_loader(ObjFormatLoader())
 {
 }
 
@@ -26,30 +28,8 @@ ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions,
 
 Model* ModelManager::loadModel()
 {
-	/*
-	 * Placeholder stuff
-	 */
-	std::vector<GLfloat> vertices = {
-	-0.5f, 0.5f, 0.0f,
-	-0.5f, -0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	0.5f, 0.5f, 0.0f
-	};
-
-	std::vector<GLuint> indices = {
-		0,1,3,
-		3,1,2
-	};
-
-	std::vector<GLfloat> textureCoords = {
-		0,0,
-		0,1,
-		1,1,
-		1,0
-	};
-
-	auto textureData = loadTexture("test.jpg");
-	auto modelData = loadModelToVao(vertices, indices, textureCoords);
+	auto textureData = loadTexture("grey.png");
+	auto modelData = m_obj_loader.loadModel("dragon");
 
 	return new Model(modelData, textureData);
 }
@@ -58,6 +38,14 @@ TextureData* ModelManager::loadTexture(std::string t_filename)
 {
 	GLint texture;
 	std::string FileName = "..\\Assets\\Textures\\" + t_filename;
+
+	Logger::GetInstance()->logAction("loading texture file " + t_filename);
+	if (!std::experimental::filesystem::exists(FileName))
+	{
+		Logger::GetInstance()->logError("No such file exists.", __LINE__, __FILE__);
+		return new TextureData(-1);
+	}
+
 	texture = SOIL_load_OGL_texture
 	(
 		FileName.c_str(),

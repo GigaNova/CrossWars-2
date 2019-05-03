@@ -34,6 +34,12 @@
     <Filter Include="Game\Entities">
       <UniqueIdentifier>{014a9b09-72c4-454d-90c4-3f0e55cc0b0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Models\Loaders">
+      <UniqueIdentifier>{67e41aaf-e234-4002-8e05-08ed605c69d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Logging">
+      <UniqueIdentifier>{079be2bd-88a2-4786-80cc-3426bec7909a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossWars2.cpp">
@@ -80,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFormatLoader.cpp">
+      <Filter>Engine\Models\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Engine\Logging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFormatLoader.h">
+      <Filter>Engine\Models\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Engine\Logging</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 #include "Camera.h"
 
-const GLfloat Camera::FOV = 90.0f;
-const GLfloat Camera::FAR_PLANE = 0.1f;
-const GLfloat Camera::NEAR_PLANE = 1000.f;
+const GLfloat Camera::FOV = 70.0f;
+const GLfloat Camera::FAR_PLANE = 1000.f;
+const GLfloat Camera::NEAR_PLANE = 0.1f;
 
 Camera::Camera() : m_position(glm::vec3(0, 0, 0)), m_pitch(0), m_yaw(0), m_roll(0)
 {
