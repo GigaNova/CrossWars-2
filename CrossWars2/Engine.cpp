@@ -5,8 +5,10 @@
 #include "Defines.h"
 #include "ShaderManager.h"
 #include "RenderManager.h"
-#include "StandardShader.h"
 #include "Logger.h"
+#include "LightShader.h"
+#include "MouseManager.h"
+#include "DeltaTime.h"
 
 Engine::Engine()
 {
@@ -19,7 +21,7 @@ Engine::Engine()
 
 	Logger::GetInstance()->logAction("All managers initiated.");
 
-	m_shader = new StandardShader();
+	m_shader = new LightShader(glm::vec3(1.0, 1.0, 1.0));
 
 	m_model = modelManager->loadModel();
 	m_entity = new BaseEntity(m_model, glm::vec3(0, 0, -10.f), glm::vec3(0, 0, 0), 1);
@@ -40,6 +42,18 @@ void Engine::getInput()
 		switch (event.type) {
 		case SDL_KEYDOWN:
 			WindowManager::GetInstance()->getCamera()->move(&event.key);
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			m_dragging = true;
+			break;
+		case SDL_MOUSEMOTION:
+			MouseManager::GetInstance()->update();
+			if (m_dragging) {
+				WindowManager::GetInstance()->getCamera()->rotate(&event.button);
+			}
+			break;
+		case SDL_MOUSEBUTTONUP:
+			m_dragging = false;
 			break;
 		case SDL_QUIT:
 			m_is_running = false;;

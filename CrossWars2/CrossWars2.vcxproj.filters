@@ -40,6 +40,12 @@
     <Filter Include="Engine\Logging">
       <UniqueIdentifier>{079be2bd-88a2-4786-80cc-3426bec7909a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Lights">
+      <UniqueIdentifier>{a1bf7b00-0fd6-4841-88e3-6a5e02fbf6ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{47bf097e-c960-4ff0-a3b8-46c80d31056f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossWars2.cpp">
@@ -92,6 +98,15 @@
     </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Engine\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="LightShader.cpp">
+      <Filter>Engine\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaTime.cpp">
+      <Filter>Engine\Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Engine\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="LightShader.h">
+      <Filter>Engine\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaTime.h">
+      <Filter>Engine\Time</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

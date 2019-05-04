@@ -6,6 +6,7 @@
 #include <GLM/glm.hpp>
 #include <GLM/ext.hpp>
 #include "Engine.h"
+#include "DeltaTime.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
 		engineInstance->getInput();
 		engineInstance->update();
 		engineInstance->render();
+		DeltaTime::GetInstance()->update();
 	}
 
 	engineInstance->cleanUp();

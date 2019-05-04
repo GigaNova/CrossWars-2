@@ -22,8 +22,13 @@ public:
 	GLfloat getRoll() const;
 	void setRoll(GLfloat t_value);
 
+	void increaseRotation(glm::vec3 t_value);
+
 	void move(SDL_KeyboardEvent* t_key);
+	void rotate(SDL_MouseButtonEvent* t_button);
 private:
+	const float SPEED = 25.f;
+
 	glm::vec3 m_position;
 	GLfloat m_pitch;
 	GLfloat m_yaw;

@@ -23,5 +23,6 @@ private:
 
 	StandardShader* m_shader;
 	BaseEntity* m_entity;
+	bool m_dragging;
 };
 
