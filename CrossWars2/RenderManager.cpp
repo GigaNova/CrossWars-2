@@ -6,6 +6,10 @@
 #include "ShaderManager.h"
 #include "StandardShader.h"
 #include "WindowManager.h"
+#include "PositionComponent.h"
+#include "RotationComponent.h"
+#include "ScaleComponent.h"
+#include "MeshComponent.h"
 
 RenderManager::RenderManager()
 {
@@ -18,7 +22,7 @@ RenderManager::~RenderManager()
 
 void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 {
-	auto model = t_entity->getModel();
+	auto model = t_entity->getComponent<MeshComponent>()->getModel();
 	auto modelData = model->getModelData();
 	auto textureData = model->getTextureData();
 
@@ -27,9 +31,9 @@ void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 	glEnableVertexAttribArray(1);
 
 	auto transformationMatrix = MathHelper::createTransformationMatrix(
-		t_entity->getPosition(), 
-		t_entity->getRotation(), 
-		t_entity->getScale()
+		t_entity->getComponent<PositionComponent>()->getPosition(), 
+		t_entity->getComponent<RotationComponent>()->getRotation(),
+		t_entity->getComponent<ScaleComponent>()->getScale()
 	);
 	t_shader->loadTransformationMatrix(transformationMatrix);
 	t_shader->loadProjectionMatrix(MathHelper::createProjectionMatrix());

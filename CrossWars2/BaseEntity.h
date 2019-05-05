@@ -1,25 +1,30 @@
 #pragma once
-#include "Model.h"
-#include <GLM/vec3.hpp>
+#include "Component.h"
+#include <unordered_map>
+#include <typeindex>
+#include <memory>
 
 class BaseEntity
 {
 public:
-	BaseEntity(Model* t_model, const glm::vec3& t_position, const glm::vec3& t_rotation, GLfloat t_scale);
+	BaseEntity();
 	~BaseEntity();
 
-	Model* getModel();
-	glm::vec3 getPosition();
-	glm::vec3 getRotation();
-	GLfloat getScale();
+	void addComponent(std::shared_ptr<Component> t_component);
 
-	void move(glm::vec3 t_amount);
-	void rotate(glm::vec3 t_amount);
-	void scale(GLfloat t_amount);
+	template<typename T>
+	std::shared_ptr<T> getComponent()
+	{
+		if(m_components.find(typeid(T)) == m_components.end())
+		{
+			return nullptr;
+		}
+
+		return std::dynamic_pointer_cast<T>(m_components[typeid(T)]);
+	}
 private:
-	Model* m_model;
-	glm::vec3 m_position;
-	glm::vec3 m_rotation;
-	GLfloat m_scale;
+	unsigned int id;
+
+	std::unordered_map<std::type_index, std::shared_ptr<Component>> m_components;
 };
 

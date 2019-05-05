@@ -28,8 +28,8 @@ ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions,
 
 Model* ModelManager::loadModel()
 {
-	auto textureData = loadTexture("grey.png");
-	auto modelData = m_obj_loader.loadModel("dragon");
+	auto textureData = loadTexture("uv.png");
+	auto modelData = m_obj_loader.loadModel("cube");
 
 	return new Model(modelData, textureData);
 }

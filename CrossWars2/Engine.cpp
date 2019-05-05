@@ -9,6 +9,10 @@
 #include "LightShader.h"
 #include "MouseManager.h"
 #include "DeltaTime.h"
+#include "PositionComponent.h"
+#include "RotationComponent.h"
+#include "MeshComponent.h"
+#include "ScaleComponent.h"
 
 Engine::Engine()
 {
@@ -21,10 +25,15 @@ Engine::Engine()
 
 	Logger::GetInstance()->logAction("All managers initiated.");
 
-	m_shader = new LightShader(glm::vec3(1.0, 1.0, 1.0));
+	m_shader = new LightShader(glm::vec3(1.0, 1.0, 0.5));
 
 	m_model = modelManager->loadModel();
-	m_entity = new BaseEntity(m_model, glm::vec3(0, 0, -10.f), glm::vec3(0, 0, 0), 1);
+
+	m_entity = new BaseEntity();
+	m_entity->addComponent(std::make_shared<PositionComponent>(0, 0, -10.f));
+	m_entity->addComponent(std::make_shared<RotationComponent>(0, 0, 0));
+	m_entity->addComponent(std::make_shared<ScaleComponent>(1.0f));
+	m_entity->addComponent(std::make_shared<MeshComponent>(m_model));
 
 	m_is_running = true;
 }
@@ -66,7 +75,7 @@ void Engine::getInput()
 
 void Engine::update()
 {
-	m_entity->rotate(glm::vec3(0, 1, 0));
+	m_entity->getComponent<RotationComponent>()->increaseRotation(glm::vec3(0, 1, 0));
 }
 
 void Engine::render()

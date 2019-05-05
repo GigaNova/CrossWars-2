@@ -3,6 +3,7 @@
 
 LightShader::LightShader(const glm::vec3 t_ambient_color) : StandardShader(), m_ambient_color(t_ambient_color)
 {
+	getAttributes();
 	loadAmbientColor(m_ambient_color);
 }
 
