@@ -1,1 +1,1 @@
-**/include/ linguist-detectable=false
+**/include/*.c linguist-detectable=false
