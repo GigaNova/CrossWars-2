@@ -50,7 +50,7 @@ WindowManager::WindowManager()
 
 	Logger::GetInstance()->logAction("GLEW initialised.");
 
-	m_camera = new Camera();
+	m_camera = new Camera(FREELOOK);
 }
 
 

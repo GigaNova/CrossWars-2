@@ -3,6 +3,12 @@
 #include <GLEW/glew.h>
 #include <SDL/SDL_events.h>
 
+enum CameraType
+{
+	STATIC,
+	FREELOOK
+};
+
 class Camera
 {
 public:
@@ -10,8 +16,10 @@ public:
 	static const GLfloat FAR_PLANE;
 	static const GLfloat NEAR_PLANE;
 
-	Camera();
+	Camera(CameraType t_type);
 	~Camera();
+
+	glm::vec3 getRotation() const;
 
 	glm::vec3 getPosition() const;
 	void setPosition(const glm::vec3& t_value);
@@ -26,8 +34,12 @@ public:
 
 	void move(SDL_KeyboardEvent* t_key);
 	void rotate(SDL_MouseButtonEvent* t_button);
+
+	void debug();
 private:
-	const float SPEED = 25.f;
+	const float SPEED = 50.f;
+
+	CameraType m_type;
 
 	glm::vec3 m_position;
 	GLfloat m_pitch;

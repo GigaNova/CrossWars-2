@@ -25,16 +25,8 @@ Engine::Engine()
 
 	Logger::GetInstance()->logAction("All managers initiated.");
 
-	m_shader = new LightShader(glm::vec3(1.0, 1.0, 0.5));
-
-	m_model = modelManager->loadModel();
-
-	m_entity = new BaseEntity();
-	m_entity->addComponent(std::make_shared<PositionComponent>(0, 0, -10.f));
-	m_entity->addComponent(std::make_shared<RotationComponent>(0, 0, 0));
-	m_entity->addComponent(std::make_shared<ScaleComponent>(1.0f));
-	m_entity->addComponent(std::make_shared<MeshComponent>(m_model));
-
+	m_shader = new LightShader(glm::vec3(10.f, 10.f, 10.f));
+	m_world = new World();
 	m_is_running = true;
 }
 
@@ -75,7 +67,8 @@ void Engine::getInput()
 
 void Engine::update()
 {
-	m_entity->getComponent<RotationComponent>()->increaseRotation(glm::vec3(0, 1, 0));
+	m_world->preUpdate();
+	m_world->update(DeltaTime::GetInstance()->getDeltaTime());
 }
 
 void Engine::render()
@@ -86,7 +79,10 @@ void Engine::render()
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glViewport(0, 0, 512, 512);
 
-	RenderManager::GetInstance()->renderEntity(m_entity, m_shader);
+	for(auto entity : *m_world->getEntities())
+	{
+		RenderManager::GetInstance()->renderEntity(entity, m_shader);
+	}
 
 	SDL_GL_SwapWindow(window);
 }

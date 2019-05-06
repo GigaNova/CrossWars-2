@@ -49,6 +49,15 @@
     <Filter Include="Engine\Components">
       <UniqueIdentifier>{171aa44c-69b2-4f99-81a2-36f1bd72d46a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Systems">
+      <UniqueIdentifier>{f71d2439-cfd4-4439-8ce5-5983ac498a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\World">
+      <UniqueIdentifier>{c4daf8ce-30e0-4c67-af5e-4945ccc38d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Factories">
+      <UniqueIdentifier>{2409d515-36d4-4766-98a7-a72d8d465613}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossWars2.cpp">
@@ -131,6 +140,24 @@
     </ClCompile>
     <ClCompile Include="RotationComponent.cpp">
       <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Engine\Models\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereFactory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +250,24 @@
     </ClInclude>
     <ClInclude Include="RotationComponent.h">
       <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Engine\Models\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereFactory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

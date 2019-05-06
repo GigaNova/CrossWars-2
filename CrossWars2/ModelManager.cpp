@@ -29,7 +29,7 @@ ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions,
 Model* ModelManager::loadModel()
 {
 	auto textureData = loadTexture("uv.png");
-	auto modelData = m_obj_loader.loadModel("cube");
+	auto modelData = m_obj_loader.loadModel("sphere");
 
 	return new Model(modelData, textureData);
 }
@@ -39,7 +39,7 @@ TextureData* ModelManager::loadTexture(std::string t_filename)
 	GLint texture;
 	std::string FileName = "..\\Assets\\Textures\\" + t_filename;
 
-	Logger::GetInstance()->logAction("loading texture file " + t_filename);
+	Logger::GetInstance()->logAction("Loading texture file " + t_filename);
 	if (!std::experimental::filesystem::exists(FileName))
 	{
 		Logger::GetInstance()->logError("No such file exists.", __LINE__, __FILE__);

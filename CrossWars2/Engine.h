@@ -4,6 +4,7 @@
 #include <GLEW/glew.h>
 #include "StandardShader.h"
 #include "BaseEntity.h"
+#include "World.h"
 
 class Engine : public TSingleton<Engine>
 {
@@ -19,10 +20,9 @@ public:
 	bool isRunning();
 private:
 	bool m_is_running;
-	Model* m_model;
 
 	StandardShader* m_shader;
-	BaseEntity* m_entity;
+	World* m_world;
 	bool m_dragging;
 };
 

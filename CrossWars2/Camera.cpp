@@ -4,17 +4,28 @@
 #include <GLM/ext.hpp>
 #include "MouseManager.h"
 #include "DeltaTime.h"
+#include "MathHelper.h"
+#include <string>
 
 const GLfloat Camera::FOV = 70.0f;
 const GLfloat Camera::FAR_PLANE = 1000.f;
 const GLfloat Camera::NEAR_PLANE = 0.1f;
 
-Camera::Camera() : m_position(glm::vec3(0.0f, 0.0f, 0.0f)), m_pitch(1), m_yaw(1), m_roll(1)
+Camera::Camera(CameraType t_type) : m_type(t_type), m_position(glm::vec3(0.0f, 0.0f, 0.0f)), m_pitch(0), m_yaw(0), m_roll(0)
 {
 }
 
 Camera::~Camera()
 {
+}
+
+glm::vec3 Camera::getRotation() const
+{
+	return glm::vec3(
+		m_pitch,
+		m_yaw,
+		m_roll
+	);
 }
 
 glm::vec3 Camera::getPosition() const
@@ -67,15 +78,19 @@ void Camera::increaseRotation(glm::vec3 t_value)
 void Camera::move(SDL_KeyboardEvent* t_key)
 {
 	SDL_Keycode pressed = t_key->keysym.sym;
+
 	float movement = SPEED * DeltaTime::GetInstance()->getDeltaTime();
+
+	glm::mat4 transMatrix = MathHelper::createTransformationMatrix(getPosition(), getRotation(), 1);
+	glm::vec3 forward = MathHelper::getForward(transMatrix);
 
 	switch (pressed)
 	{
 	case SDLK_w:
-		m_position.y += movement;
+		m_position += movement * forward;
 		break;
 	case SDLK_s:
-		m_position.y -= movement;
+		m_position -= movement * forward;
 		break;
 	case SDLK_a:
 		m_position.x -= movement;
@@ -88,8 +103,27 @@ void Camera::move(SDL_KeyboardEvent* t_key)
 
 void Camera::rotate(SDL_MouseButtonEvent* t_button)
 {
-	glm::vec2 mouseDelta = MouseManager::GetInstance()->getMouseDelta();
+	if(m_type == FREELOOK)
+	{
+		glm::vec2 mouseDelta = MouseManager::GetInstance()->getMouseDelta();
 
-	m_yaw += mouseDelta.x;
-	m_pitch += mouseDelta.y;
+		m_yaw += mouseDelta.x;
+		m_pitch += mouseDelta.y;
+	}
+
+}
+
+void Camera::debug()
+{
+	std::cout <<
+		"Pitch: " + std::to_string(m_pitch) << " "
+		"Yaw: " + std::to_string(m_yaw) << " "
+		"Roll: " + std::to_string(m_roll) <<
+	std::endl;
+
+	std::cout <<
+		"X: " + std::to_string(m_position.x) << " "
+		"Y: " + std::to_string(m_position.y) << " "
+		"Z: " + std::to_string(m_position.z) <<
+	std::endl;
 }

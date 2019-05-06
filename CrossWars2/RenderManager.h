@@ -1,8 +1,8 @@
 #pragma once
 #include "Singleton.h"
 
-class StandardShader;
 class BaseEntity;
+class StandardShader;
 
 class RenderManager : public TSingleton<RenderManager>
 {
