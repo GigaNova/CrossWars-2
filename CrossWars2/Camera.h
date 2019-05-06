@@ -15,6 +15,7 @@ public:
 	static const GLfloat FOV;
 	static const GLfloat FAR_PLANE;
 	static const GLfloat NEAR_PLANE;
+	static constexpr GLfloat AspectRatio() { return 512.f / 512.f; }
 
 	Camera(CameraType t_type);
 	~Camera();

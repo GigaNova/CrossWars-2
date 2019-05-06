@@ -21,7 +21,7 @@ glm::mat4 MathHelper::createViewMatrix(Camera* t_camera)
 
 glm::mat4 MathHelper::createProjectionMatrix()
 {
-	return glm::perspective(Camera::FOV, 512.0f / 512.0f, 0.1f, 1000.0f);
+	return glm::perspective(Camera::FOV, Camera::AspectRatio(), Camera::NEAR_PLANE, Camera::FAR_PLANE);
 }
 
 glm::vec3 MathHelper::getForward(const glm::mat4& t_transformation)

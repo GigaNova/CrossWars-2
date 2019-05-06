@@ -108,7 +108,7 @@ void Camera::rotate(SDL_MouseButtonEvent* t_button)
 		glm::vec2 mouseDelta = MouseManager::GetInstance()->getMouseDelta();
 
 		m_yaw += mouseDelta.x;
-		m_pitch += mouseDelta.y;
+		m_pitch -= mouseDelta.y;
 	}
 
 }
