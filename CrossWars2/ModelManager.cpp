@@ -15,12 +15,13 @@ ModelManager::~ModelManager()
 {
 }
 
-ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLuint> t_indices, std::vector<GLfloat> t_texture_coords)
+ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLuint> t_indices, std::vector<GLfloat> t_normals, std::vector<GLfloat> t_texture_coords)
 {
 	GLuint id = createVao();
 	bindIndices(t_indices);
 	storeData(0, 3, t_vertex_positions);
 	storeData(1, 2, t_texture_coords);
+	storeData(2, 3, t_normals);
 	unbindVao();
 
 	return new ModelData(id, t_indices.size());

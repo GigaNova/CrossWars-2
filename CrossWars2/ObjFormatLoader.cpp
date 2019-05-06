@@ -146,7 +146,7 @@ ModelData* ObjFormatLoader::loadModel(std::string t_filename)
 		normalsArray[i * 3 + 2] = normalVector.z;
 	}
 
-	return ModelManager::GetInstance()->loadModelToVao(verticesArray, indices, textureArray);
+	return ModelManager::GetInstance()->loadModelToVao(verticesArray, indices, normalsArray, textureArray);
 }
 
 std::vector<std::string> ObjFormatLoader::splitStringDel(std::string const& t_original, char t_separator, std::vector<std::string>& t_result)

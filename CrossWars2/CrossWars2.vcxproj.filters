@@ -156,7 +156,13 @@
     <ClCompile Include="Vertex.cpp">
       <Filter>Engine\Models\Loaders</Filter>
     </ClCompile>
+    <ClCompile Include="StaticLight.cpp">
+      <Filter>Engine\Lights</Filter>
+    </ClCompile>
     <ClCompile Include="SphereFactory.cpp">
+      <Filter>Game\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -267,6 +273,12 @@
       <Filter>Engine\Models\Loaders</Filter>
     </ClInclude>
     <ClInclude Include="SphereFactory.h">
+      <Filter>Game\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticLight.h">
+      <Filter>Engine\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

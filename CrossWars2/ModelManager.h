@@ -15,7 +15,7 @@ public:
 	void cleanUp();
 
 	Model* loadModel();
-	ModelData* loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLuint> t_indices, std::vector<GLfloat> t_texture_coords);
+	ModelData* loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLuint> t_indices, std::vector<GLfloat> t_normals, std::vector<GLfloat> t_texture_coords);
 	TextureData* loadTexture(std::string t_filename);
 private:
 	GLuint createVao();

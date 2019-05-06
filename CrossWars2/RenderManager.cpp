@@ -29,6 +29,7 @@ void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 	glBindVertexArray(modelData->getVaoId());
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
 	auto transformationMatrix = MathHelper::createTransformationMatrix(
 		t_entity->getComponent<PositionComponent>()->getPosition(), 
@@ -48,6 +49,7 @@ void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 	glDrawElements(GL_TRIANGLES, modelData->getVertexCount(), GL_UNSIGNED_INT, BUFFER_OFFSET(0));
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 	glBindVertexArray(0);
 }
 

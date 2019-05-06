@@ -2,17 +2,14 @@
 #include "WindowManager.h"
 #include <GLEW/glew.h>
 #include "ModelManager.h"
-#include "Defines.h"
 #include "ShaderManager.h"
 #include "RenderManager.h"
 #include "Logger.h"
 #include "LightShader.h"
 #include "MouseManager.h"
 #include "DeltaTime.h"
-#include "PositionComponent.h"
-#include "RotationComponent.h"
-#include "MeshComponent.h"
-#include "ScaleComponent.h"
+#include "Color.h"
+#include "StaticLight.h"
 
 Engine::Engine()
 {
@@ -25,7 +22,9 @@ Engine::Engine()
 
 	Logger::GetInstance()->logAction("All managers initiated.");
 
-	m_shader = new LightShader(glm::vec3(10.f, 10.f, 10.f));
+	StaticLight light(glm::vec3(0, 0, 0), Color::fromHex("FBF8E6"));
+
+	m_shader = new LightShader(glm::vec3(0.5f, 0.5f, 0.5f), light);
 	m_world = new World();
 	m_is_running = true;
 }

@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="BaseEntity.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentManager.cpp" />
     <ClCompile Include="CrossWars2.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="SphereFactory.cpp" />
     <ClCompile Include="StandardShader.cpp" />
+    <ClCompile Include="StaticLight.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="VelocityComponent.cpp" />
@@ -196,6 +198,7 @@
   <ItemGroup>
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="Defines.h" />
@@ -224,6 +227,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SphereFactory.h" />
     <ClInclude Include="StandardShader.h" />
+    <ClInclude Include="StaticLight.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="TextureData.h" />
     <ClInclude Include="VelocityComponent.h" />

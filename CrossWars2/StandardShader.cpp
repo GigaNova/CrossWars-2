@@ -3,7 +3,8 @@
 
 StandardShader::StandardShader() : ProtoShader("vertexShader.vert", "fragmentshader.frag")
 {
-	getAttributes();
+	StandardShader::bindAttributes();
+	StandardShader::getAttributes();
 }
 
 StandardShader::~StandardShader()
