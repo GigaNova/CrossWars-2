@@ -167,6 +167,7 @@
     <ClCompile Include="ComponentManager.cpp" />
     <ClCompile Include="CrossWars2.cpp" />
     <ClCompile Include="CubeMarcher.cpp" />
+    <ClCompile Include="CubeTerrain.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="FastNoise.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="CubeMarcher.h" />
+    <ClInclude Include="CubeTerrain.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="Engine.h" />

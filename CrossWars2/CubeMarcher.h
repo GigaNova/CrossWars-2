@@ -3,6 +3,8 @@
 #include "ModelData.h"
 #include <vector>
 #include <GLM/gtx/compatibility.hpp>
+#include "CubeTerrain.h"
+#include "FastNoise.h"
 
 typedef std::vector<std::vector<std::vector<glm::float4>>> ScalarField;
 
@@ -12,9 +14,10 @@ public:
 	CubeMarcher();
 	~CubeMarcher();
 
-	ModelData* generateMesh(int t_width, int t_height, int t_depth);
+	CubeTerrain* generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
+	ModelData* generateMesh(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
 private:
-	void initializeField(int t_width, int t_height, int t_depth);
+	void initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
 
 	std::vector<glm::vec3> march(int t_width, int t_height, int t_depth);
 	
@@ -28,6 +31,8 @@ private:
 	glm::float3 linearInterp(float t_val, glm::float4 t_p1, glm::float4 t_p2);
 
 	bool lt(const glm::float4& t_left, const glm::float4& t_right);
+
+	FastNoise m_noiseGen;
 
 	ScalarField m_scalar_field;
 

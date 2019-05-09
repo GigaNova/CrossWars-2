@@ -2,6 +2,7 @@
 #include <vector>
 #include "BaseEntity.h"
 #include "System.h"
+#include "CubeMarcher.h"
 
 class World
 {
@@ -16,5 +17,7 @@ public:
 private:
 	std::vector<BaseEntity*> m_entity_vector;
 	std::vector<System*> m_system_vector;
+
+	CubeMarcher* m_cube_marcher;
 };
 

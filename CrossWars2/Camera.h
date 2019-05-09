@@ -15,7 +15,7 @@ public:
 	static const GLfloat FOV;
 	static const GLfloat FAR_PLANE;
 	static const GLfloat NEAR_PLANE;
-	static constexpr GLfloat AspectRatio() { return 512.f / 512.f; }
+	static constexpr GLfloat AspectRatio() { return 1024.f / 768.f; }
 
 	Camera(CameraType t_type);
 	~Camera();
@@ -38,7 +38,7 @@ public:
 
 	void debug();
 private:
-	const float SPEED = 50.f;
+	const float SPEED = 150.f;
 
 	CameraType m_type;
 

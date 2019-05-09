@@ -2,23 +2,41 @@
 #include "Noise/PerlinNoise.hpp"
 #include <ctime>
 #include <GLM/gtx/compatibility.hpp>
-#include <iostream>
 #include "ModelManager.h"
-#include "Logger.h"
 #include "FastNoise.h"
+#include "CubeTerrain.h"
+#include "MeshComponent.h"
 
 CubeMarcher::CubeMarcher()
 {
+	m_noiseGen.SetNoiseType(FastNoise::SimplexFractal);
+	m_noiseGen.SetSeed(time(nullptr));
+	m_noiseGen.SetFractalOctaves(4);
 }
 
 CubeMarcher::~CubeMarcher()
 {
 }
 
-ModelData* CubeMarcher::generateMesh(int t_width, int t_height, int t_depth)
+CubeTerrain* CubeMarcher::generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
+{
+	//Generate mesh.
+	auto modelData = generateMesh(t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
+
+	//Return the chunk.
+	auto terrain = new CubeTerrain(m_scalar_field, glm::vec3(t_offset_x, t_offset_y, t_offset_z));
+
+	//Add mesh to terrain.
+	terrain->addComponent(new MeshComponent(new Model(modelData, nullptr)));
+
+	//Return chunk.
+	return terrain;
+}
+
+ModelData* CubeMarcher::generateMesh(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
 {
 	//Initialize the scalar field with perlin noise.
-	initializeField(t_width, t_height, t_depth);
+	initializeField(t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
 
 	//March through the scalar field.
 	const auto triangles = march(t_width, t_height, t_depth);
@@ -29,27 +47,23 @@ ModelData* CubeMarcher::generateMesh(int t_width, int t_height, int t_depth)
 	//Rebuild triangles to vertices.
 	const auto vertices = toTriList(triangles);
 
-	//Return model data.
+	//Load model data.
 	return ModelManager::GetInstance()->loadModelToVao(vertices, normals);
 }
 
-void CubeMarcher::initializeField(int t_width, int t_height, int t_depth)
+void CubeMarcher::initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
 {
-	FastNoise noiseGen;
-	noiseGen.SetNoiseType(FastNoise::SimplexFractal);
-	noiseGen.SetSeed(time(nullptr));
-
-	for (int i = 0; i < t_width; ++i)
+	for (int i = t_offset_x; i < t_offset_x + t_width; ++i)
 	{
 		m_scalar_field.push_back(std::vector<std::vector<glm::float4>>());
-		for (int j = 0; j < t_height; ++j)
+		for (int j = t_offset_y; j < t_offset_y + t_height; ++j)
 		{
 			m_scalar_field[i].push_back(std::vector<glm::float4>());
-			for (int k = 0; k < t_depth; ++k)
+			for (int k = t_offset_z; k < t_offset_z + t_depth; ++k)
 			{
-				double noise = noiseGen.GetNoise(i, j, k) + (j * 0.01) - 0.3;
+				double noise = m_noiseGen.GetNoise(i, j, k) + (j * 0.025) - 0.3;
 
-				if (j == t_height - 1) noise = 0.2;
+				if (j == 0) noise = 0.1;
 
 				m_scalar_field[i][j].push_back(glm::float4(i, j, k, noise));
 			}

@@ -20,18 +20,13 @@ World::World()
 		m_entity_vector.push_back(sphere);
 	}*/
 
-	CubeMarcher marcher;
-	auto mesh = marcher.generateMesh(200, 200, 200);
-	auto texture = ModelManager::GetInstance()->loadTexture("uv.png");
-	auto model = new Model(mesh, nullptr);
-
-	BaseEntity* terrain = new BaseEntity();
+	m_cube_marcher = new CubeMarcher();
+	auto terrain = m_cube_marcher->generateChunk(0, 0, 0, 200, 200, 200);
 
 	terrain->addComponent(new PositionComponent(0, 0, 0));
 	terrain->addComponent(new RotationComponent(0, 0, 0));
-	terrain->addComponent(new ScaleComponent(1.0));
-	terrain->addComponent(new MeshComponent(model));
-	terrain->addComponent(new ColorComponent(Color::fromHex("3CB371")));
+	terrain->addComponent(new ScaleComponent(2.0));
+	terrain->addComponent(new ColorComponent(Color::fromHex("90EE90")));
 
 	m_entity_vector.push_back(terrain);
 
