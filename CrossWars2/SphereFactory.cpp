@@ -6,6 +6,8 @@
 #include "ModelManager.h"
 #include <random>
 #include <ctime>
+#include "Color.h"
+#include "ColorComponent.h"
 
 SphereFactory::SphereFactory()
 {
@@ -30,6 +32,7 @@ BaseEntity* SphereFactory::makeSphere()
 	entity->addComponent(new RotationComponent(rot(rng), rot(rng), rot(rng)));
 	entity->addComponent(new ScaleComponent(scale(rng)));
 	entity->addComponent(new MeshComponent(m_sphere_model));
+	//entity->addComponent(new ColorComponent(Color::fromRgb(255, 0, 255)));
 
 	return entity;
 }

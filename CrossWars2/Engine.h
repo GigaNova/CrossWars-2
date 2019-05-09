@@ -5,6 +5,7 @@
 #include "StandardShader.h"
 #include "BaseEntity.h"
 #include "World.h"
+#include "FlatShader.h"
 
 class Engine : public TSingleton<Engine>
 {
@@ -21,7 +22,8 @@ public:
 private:
 	bool m_is_running;
 
-	StandardShader* m_shader;
+	StandardShader* m_standard_shader;
+	FlatShader* m_flat_shader;
 	World* m_world;
 	bool m_dragging;
 };

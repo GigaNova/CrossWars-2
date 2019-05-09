@@ -58,6 +58,9 @@
     <Filter Include="Game\Factories">
       <UniqueIdentifier>{2409d515-36d4-4766-98a7-a72d8d465613}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helpers\Noise">
+      <UniqueIdentifier>{73ebdf7a-d4e1-4191-8e4e-71cf3421119a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossWars2.cpp">
@@ -162,8 +165,23 @@
     <ClCompile Include="SphereFactory.cpp">
       <Filter>Game\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="CubeMarcher.cpp">
+      <Filter>Game\Factories</Filter>
+    </ClCompile>
     <ClCompile Include="Color.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorComponent.cpp">
+      <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FlatShader.cpp">
+      <Filter>Engine\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="LightFlatShader.cpp">
+      <Filter>Engine\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="FastNoise.cpp">
+      <Filter>Helpers\Noise</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,8 +296,23 @@
     <ClInclude Include="StaticLight.h">
       <Filter>Engine\Lights</Filter>
     </ClInclude>
+    <ClInclude Include="CubeMarcher.h">
+      <Filter>Game\Factories</Filter>
+    </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Header Files</Filter>
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FlatShader.h">
+      <Filter>Engine\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="LightFlatShader.h">
+      <Filter>Engine\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="FastNoise.h">
+      <Filter>Helpers\Noise</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

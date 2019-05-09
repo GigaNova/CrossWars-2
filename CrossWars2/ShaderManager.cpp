@@ -46,7 +46,7 @@ void ShaderManager::loadFragmentShader(const char* t_filename)
 	glCompileShader(m_fragment_id);
 }
 
-void ShaderManager::bindPrograms()
+GLuint ShaderManager::bindPrograms()
 {
 	m_program_id = glCreateProgram();
 	glAttachShader(m_program_id, m_vertex_id);
@@ -70,10 +70,7 @@ void ShaderManager::bindPrograms()
 
 	glDeleteShader(m_vertex_id);
 	glDeleteShader(m_fragment_id);
-}
 
-GLuint ShaderManager::getProgramID()
-{
 	return m_program_id;
 }
 

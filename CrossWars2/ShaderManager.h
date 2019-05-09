@@ -16,9 +16,8 @@ public:
 
 	void loadVertexShader(const char* t_filename);
 	void loadFragmentShader(const char* t_filename);
-	void bindPrograms();
+	GLuint bindPrograms();
 
-	GLuint getProgramID();
 	GLuint getVariable(const char* t_var);
 	void bindAttribute(GLint t_attribute, const char* t_variable);
 

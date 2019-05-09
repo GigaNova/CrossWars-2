@@ -27,6 +27,16 @@ ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions,
 	return new ModelData(id, t_indices.size());
 }
 
+ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLfloat> t_normals)
+{
+	GLuint id = createVao();
+	storeData(0, 3, t_vertex_positions);
+	storeData(1, 3, t_normals);
+	unbindVao();
+
+	return new ModelData(id, t_vertex_positions.size() / 3);
+}
+
 Model* ModelManager::loadModel()
 {
 	auto textureData = loadTexture("uv.png");
@@ -37,26 +47,47 @@ Model* ModelManager::loadModel()
 
 TextureData* ModelManager::loadTexture(std::string t_filename)
 {
-	GLint texture;
-	std::string FileName = "..\\Assets\\Textures\\" + t_filename;
+	unsigned char* texture;
+	GLuint textureId;
+
+	std::string path = "..\\Assets\\Textures\\" + t_filename;
+	const char* fileName = path.c_str();
 
 	Logger::GetInstance()->logAction("Loading texture file " + t_filename);
-	if (!std::experimental::filesystem::exists(FileName))
+	if (!std::experimental::filesystem::exists(path))
 	{
 		Logger::GetInstance()->logError("No such file exists.", __LINE__, __FILE__);
 		return new TextureData(-1);
 	}
 
-	texture = SOIL_load_OGL_texture
-	(
-		FileName.c_str(),
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS
-	);
+	glGenTextures(1, &textureId);
 
-	m_texture_vector.push_back(texture);
-	return new TextureData(texture);
+	int width;
+	int height;
+	int channel;
+
+	texture = SOIL_load_image(fileName, &width, &height, &channel, SOIL_LOAD_RGB);
+
+	if (texture == NULL) {
+		Logger::GetInstance()->logError("An error occured loading image.", __LINE__, __FILE__);
+		return new TextureData(-1);
+	}
+
+	glBindTexture(GL_TEXTURE_2D, textureId);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	SOIL_free_image_data(texture);
+
+	m_texture_vector.push_back(textureId);
+	return new TextureData(textureId);
 }
 
 GLuint ModelManager::createVao()

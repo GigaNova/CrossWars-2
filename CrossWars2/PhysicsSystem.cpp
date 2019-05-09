@@ -22,7 +22,7 @@ void PhysicsSystem::processComponents(double t_delta_time)
 	while(!m_components.empty())
 	{
 		auto component = dynamic_cast<RotationComponent*>(m_components.front());
-		component->increaseRotation(glm::vec3(0, 100.f * t_delta_time, 0));
+		component->increaseRotation(glm::vec3(100.f * t_delta_time, 0, 100.f * t_delta_time));
 		m_components.pop();
 	}
 }

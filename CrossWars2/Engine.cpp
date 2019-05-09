@@ -10,6 +10,9 @@
 #include "DeltaTime.h"
 #include "Color.h"
 #include "StaticLight.h"
+#include "FlatShader.h"
+#include "ColorComponent.h"
+#include "LightFlatShader.h"
 
 Engine::Engine()
 {
@@ -22,9 +25,10 @@ Engine::Engine()
 
 	Logger::GetInstance()->logAction("All managers initiated.");
 
-	StaticLight light(glm::vec3(0, 0, 0), Color::fromHex("FBF8E6"));
+	StaticLight light(glm::vec3(0, 1000, 0), Color::fromHex("FBF8E6"));
+	m_standard_shader = new LightShader(glm::vec3(0.5f, 0.5f, 0.5f), light);
+	m_flat_shader = new LightFlatShader(light);
 
-	m_shader = new LightShader(glm::vec3(0.5f, 0.5f, 0.5f), light);
 	m_world = new World();
 	m_is_running = true;
 }
@@ -76,11 +80,18 @@ void Engine::render()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glViewport(0, 0, 512, 512);
+	glViewport(0, 0, 1024, 768);
 
 	for(auto entity : *m_world->getEntities())
 	{
-		RenderManager::GetInstance()->renderEntity(entity, m_shader);
+		if(entity->getComponent<ColorComponent>())
+		{
+			RenderManager::GetInstance()->renderEntityFlat(entity, m_flat_shader);
+		}
+		else 
+		{
+			RenderManager::GetInstance()->renderEntity(entity, m_standard_shader);
+		}
 	}
 
 	SDL_GL_SwapWindow(window);
