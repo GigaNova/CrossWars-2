@@ -3,6 +3,7 @@
 #include <GLM/glm.hpp>
 #include "ModelData.h"
 #include "Vertex.h"
+#include <string>-
 
 class ObjFormatLoader
 {

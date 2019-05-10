@@ -9,7 +9,6 @@
 
 CubeMarcher::CubeMarcher()
 {
-	m_noiseGen.SetNoiseType(FastNoise::SimplexFractal);
 	m_noiseGen.SetSeed(time(nullptr));
 	m_noiseGen.SetFractalOctaves(4);
 }
@@ -20,11 +19,14 @@ CubeMarcher::~CubeMarcher()
 
 CubeTerrain* CubeMarcher::generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
 {
+	//Generate Scalar field
+	auto scalarField = initializeField(t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
+
 	//Generate mesh.
-	auto modelData = generateMesh(t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
+	auto modelData = generateMesh(scalarField, t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
 
 	//Return the chunk.
-	auto terrain = new CubeTerrain(m_scalar_field, glm::vec3(t_offset_x, t_offset_y, t_offset_z));
+	auto terrain = new CubeTerrain(scalarField, glm::vec3(t_offset_x, t_offset_y, t_offset_z));
 
 	//Add mesh to terrain.
 	terrain->addComponent(new MeshComponent(new Model(modelData, nullptr)));
@@ -33,13 +35,10 @@ CubeTerrain* CubeMarcher::generateChunk(int t_offset_x, int t_offset_y, int t_of
 	return terrain;
 }
 
-ModelData* CubeMarcher::generateMesh(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
+ModelData* CubeMarcher::generateMesh(const ScalarField& t_scalar_field, int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
 {
-	//Initialize the scalar field with perlin noise.
-	initializeField(t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
-
 	//March through the scalar field.
-	const auto triangles = march(t_width, t_height, t_depth);
+	const auto triangles = march(t_scalar_field, t_width, t_height, t_depth);
 
 	//Build normals for marched mesh.
 	const auto normals = calculateNormals(triangles);
@@ -51,46 +50,54 @@ ModelData* CubeMarcher::generateMesh(int t_offset_x, int t_offset_y, int t_offse
 	return ModelManager::GetInstance()->loadModelToVao(vertices, normals);
 }
 
-void CubeMarcher::initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
+ScalarField CubeMarcher::initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
 {
-	for (int i = t_offset_x; i < t_offset_x + t_width; ++i)
+	ScalarField scalarField(0);
+
+	for (int i = t_offset_x; i < t_offset_x + t_width + 1; ++i)
 	{
-		m_scalar_field.push_back(std::vector<std::vector<glm::float4>>());
-		for (int j = t_offset_y; j < t_offset_y + t_height; ++j)
+		scalarField.push_back(std::vector<std::vector<glm::float4>>());
+		for (int j = t_offset_y; j < t_offset_y + t_height + 1; ++j)
 		{
-			m_scalar_field[i].push_back(std::vector<glm::float4>());
-			for (int k = t_offset_z; k < t_offset_z + t_depth; ++k)
+			scalarField[i - t_offset_x].push_back(std::vector<glm::float4>());
+			for (int k = t_offset_z; k < t_offset_z + t_depth + 1; ++k)
 			{
+				m_noiseGen.SetNoiseType(FastNoise::SimplexFractal);
 				double noise = m_noiseGen.GetNoise(i, j, k) + (j * 0.025) - 0.3;
+
+				m_noiseGen.SetNoiseType(FastNoise::PerlinFractal);
+				noise += (m_noiseGen.GetNoise(i, j, k) + (j * 0.025) - 0.3) / 2.0;
 
 				if (j == 0) noise = 0.1;
 
-				m_scalar_field[i][j].push_back(glm::float4(i, j, k, noise));
+				scalarField[i - t_offset_x][j - t_offset_y].push_back(glm::float4(i, j, k, noise));
 			}
 		}
 	}
 
 	m_scalar_median = 0.2;
+
+	return scalarField;
 }
 
-std::vector<glm::vec3> CubeMarcher::march(int t_width, int t_height, int t_depth)
+std::vector<glm::vec3> CubeMarcher::march(const ScalarField& t_scalar_field, int t_width, int t_height, int t_depth)
 {
 	std::vector<glm::vec3> triangles;
 
 	glm::vec3 pos(0, 0, 0);
-	for (int x = 0; x < t_width - 1; x++)
-	for (int y = 0; y < t_height - 1; y++)
-	for (int z = 0; z < t_depth - 1; z++)
+	for (int x = 0; x < t_width; x++)
+	for (int y = 0; y < t_height; y++)
+	for (int z = 0; z < t_depth; z++)
 	{
 		glm::float4 cubeCorners[8] = {
-			m_scalar_field[x][y][z],
-			m_scalar_field[x + 1][y][z],
-			m_scalar_field[x + 1][y][z + 1],
-			m_scalar_field[x][y][z + 1],
-			m_scalar_field[x][y + 1][z],
-			m_scalar_field[x + 1][y + 1][z],
-			m_scalar_field[x + 1][y + 1][z + 1],
-			m_scalar_field[x][y + 1][z + 1]
+			t_scalar_field[x][y][z],
+			t_scalar_field[x + 1][y][z],
+			t_scalar_field[x + 1][y][z + 1],
+			t_scalar_field[x][y][z + 1],
+			t_scalar_field[x][y + 1][z],
+			t_scalar_field[x + 1][y + 1][z],
+			t_scalar_field[x + 1][y + 1][z + 1],
+			t_scalar_field[x][y + 1][z + 1]
 		};
 
 		int cubeindex = 0;

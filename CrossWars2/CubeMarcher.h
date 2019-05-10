@@ -15,11 +15,11 @@ public:
 	~CubeMarcher();
 
 	CubeTerrain* generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
-	ModelData* generateMesh(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
+	ModelData* generateMesh(const ScalarField& t_scalar_field, int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
 private:
-	void initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
+	ScalarField initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
 
-	std::vector<glm::vec3> march(int t_width, int t_height, int t_depth);
+	std::vector<glm::vec3> march(const ScalarField& t_scalar_field, int t_width, int t_height, int t_depth);
 	
 	glm::vec3 calulateNormal(const glm::vec3 t_vertex1, const glm::vec3 t_vertex2, const glm::vec3 t_vertex3);
 	std::vector<GLfloat> calculateNormals(const std::vector<glm::vec3> t_triangles);
@@ -33,8 +33,6 @@ private:
 	bool lt(const glm::float4& t_left, const glm::float4& t_right);
 
 	FastNoise m_noiseGen;
-
-	ScalarField m_scalar_field;
 
 	double m_scalar_max;
 	double m_scalar_median;

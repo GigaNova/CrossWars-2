@@ -21,14 +21,21 @@ World::World()
 	}*/
 
 	m_cube_marcher = new CubeMarcher();
-	auto terrain = m_cube_marcher->generateChunk(0, 0, 0, 200, 200, 200);
 
-	terrain->addComponent(new PositionComponent(0, 0, 0));
-	terrain->addComponent(new RotationComponent(0, 0, 0));
-	terrain->addComponent(new ScaleComponent(2.0));
-	terrain->addComponent(new ColorComponent(Color::fromHex("90EE90")));
+	for(int i = 0; i < 20; ++i)
+	{
+		for(int j = 0; j < 20; ++j)
+		{
+			auto terrain = m_cube_marcher->generateChunk(i * 30, 0, j * 30, 30, 30, 30);
 
-	m_entity_vector.push_back(terrain);
+			terrain->addComponent(new PositionComponent(0, 0, 0));
+			terrain->addComponent(new RotationComponent(0, 0, 0));
+			terrain->addComponent(new ScaleComponent(2.0));
+			terrain->addComponent(new ColorComponent(Color::fromHex("006666")));
+
+			m_entity_vector.push_back(terrain);
+		}
+	}
 
 	//m_system_vector.push_back(new PhysicsSystem());
 }
