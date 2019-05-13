@@ -6,10 +6,12 @@
 #include "FastNoise.h"
 #include "CubeTerrain.h"
 #include "MeshComponent.h"
+#include "TerrainChunk.h"
+#include "ChunkData.h"
 
-CubeMarcher::CubeMarcher()
+CubeMarcher::CubeMarcher(int t_seed)
 {
-	m_noiseGen.SetSeed(time(nullptr));
+	m_noiseGen.SetSeed(t_seed);
 	m_noiseGen.SetFractalOctaves(4);
 }
 
@@ -17,7 +19,7 @@ CubeMarcher::~CubeMarcher()
 {
 }
 
-CubeTerrain* CubeMarcher::generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
+TerrainChunk* CubeMarcher::generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
 {
 	//Generate Scalar field
 	auto scalarField = initializeField(t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
@@ -26,16 +28,13 @@ CubeTerrain* CubeMarcher::generateChunk(int t_offset_x, int t_offset_y, int t_of
 	auto modelData = generateMesh(scalarField, t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
 
 	//Return the chunk.
-	auto terrain = new CubeTerrain(scalarField, glm::vec3(t_offset_x, t_offset_y, t_offset_z));
-
-	//Add mesh to terrain.
-	terrain->addComponent(new MeshComponent(new Model(modelData, nullptr)));
+	auto terrain = new TerrainChunk(modelData, scalarField, glm::vec3(t_offset_x, t_offset_y, t_offset_z));
 
 	//Return chunk.
 	return terrain;
 }
 
-ModelData* CubeMarcher::generateMesh(const ScalarField& t_scalar_field, int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
+ChunkData* CubeMarcher::generateMesh(const ScalarField& t_scalar_field, int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
 {
 	//March through the scalar field.
 	const auto triangles = march(t_scalar_field, t_width, t_height, t_depth);
@@ -47,7 +46,7 @@ ModelData* CubeMarcher::generateMesh(const ScalarField& t_scalar_field, int t_of
 	const auto vertices = toTriList(triangles);
 
 	//Load model data.
-	return ModelManager::GetInstance()->loadModelToVao(vertices, normals);
+	return new ChunkData(vertices, normals);
 }
 
 ScalarField CubeMarcher::initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth)
@@ -63,19 +62,19 @@ ScalarField CubeMarcher::initializeField(int t_offset_x, int t_offset_y, int t_o
 			for (int k = t_offset_z; k < t_offset_z + t_depth + 1; ++k)
 			{
 				m_noiseGen.SetNoiseType(FastNoise::SimplexFractal);
-				double noise = m_noiseGen.GetNoise(i, j, k) + (j * 0.025) - 0.3;
+				double noise = m_noiseGen.GetNoise(i, j, k) + (j * 0.0155) - 0.3;
 
-				m_noiseGen.SetNoiseType(FastNoise::PerlinFractal);
-				noise += (m_noiseGen.GetNoise(i, j, k) + (j * 0.025) - 0.3) / 2.0;
+				m_noiseGen.SetNoiseType(FastNoise::Perlin);
+				noise += (m_noiseGen.GetNoise(i, j, k) + (j * 0.055) - 0.3) / PERLIN_WEAKNESS;
 
-				if (j == 0) noise = 0.1;
+				if (j == 0) noise = 0;
 
 				scalarField[i - t_offset_x][j - t_offset_y].push_back(glm::float4(i, j, k, noise));
 			}
 		}
 	}
 
-	m_scalar_median = 0.2;
+	m_scalar_median = 0.1;
 
 	return scalarField;
 }

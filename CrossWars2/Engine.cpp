@@ -25,12 +25,14 @@ Engine::Engine()
 
 	Logger::GetInstance()->logAction("All managers initiated.");
 
-	StaticLight light(glm::vec3(0, 1000, 0), Color::fromHex("FBF8E6"));
-	m_standard_shader = new LightShader(glm::vec3(0.5f, 0.5f, 0.5f), light);
-	m_flat_shader = new LightFlatShader(light);
+	//Demo setup
+	windowManager->getCamera()->setPosition(glm::vec3(0, 320, 0));
+	windowManager->getCamera()->setPitch(32);
+	windowManager->getCamera()->setYaw(-316);
 
 	m_world = new World();
 	m_is_running = true;
+	m_dragging = false;
 }
 
 
@@ -74,26 +76,16 @@ void Engine::update()
 	m_world->update(DeltaTime::GetInstance()->getDeltaTime());
 }
 
-void Engine::render()
+void Engine::prepareRender()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.83, 97.0, 1.0, 1.0);
+	glViewport(0, 0, 1024, 768);
+}
+
+void Engine::swapWindow()
 {
 	auto window = WindowManager::GetInstance()->getRenderWindow();
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glViewport(0, 0, 1024, 768);
-
-	for(auto entity : *m_world->getEntities())
-	{
-		if(entity->getComponent<ColorComponent>())
-		{
-			RenderManager::GetInstance()->renderEntityFlat(entity, m_flat_shader);
-		}
-		else 
-		{
-			RenderManager::GetInstance()->renderEntity(entity, m_standard_shader);
-		}
-	}
-
 	SDL_GL_SwapWindow(window);
 }
 

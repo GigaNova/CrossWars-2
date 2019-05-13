@@ -11,6 +11,7 @@
 #include "ScaleComponent.h"
 #include "MeshComponent.h"
 #include "ColorComponent.h"
+#include "TextureComponent.h"
 
 RenderManager::RenderManager()
 {
@@ -23,9 +24,8 @@ RenderManager::~RenderManager()
 
 void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 {
-	auto model = t_entity->getComponent<MeshComponent>()->getModel();
-	auto modelData = model->getModelData();
-	auto textureData = model->getTextureData();
+	auto modelData = t_entity->getComponent<MeshComponent>()->getModel();
+	auto textureData = t_entity->getComponent<TextureComponent>()->getTexture();
 
 	glUseProgram(t_shader->getProgramId());
 	glBindVertexArray(modelData->getVaoId());
@@ -42,6 +42,7 @@ void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 	t_shader->loadProjectionMatrix(MathHelper::createProjectionMatrix());
 	t_shader->loadViewMatrix(MathHelper::createViewMatrix(WindowManager::GetInstance()->getCamera()));
 
+	glShadeModel(GL_FLAT);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureData->getTextureId());
 	glDrawElements(GL_TRIANGLES, modelData->getVertexCount(), GL_UNSIGNED_INT, BUFFER_OFFSET(0));
@@ -55,8 +56,7 @@ void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 
 void RenderManager::renderEntityFlat(BaseEntity* t_entity, FlatShader* t_shader)
 {
-	auto model = t_entity->getComponent<MeshComponent>()->getModel();
-	auto modelData = model->getModelData();
+	auto modelData = t_entity->getComponent<MeshComponent>()->getModel();
 
 	glUseProgram(t_shader->getProgramId());
 	glBindVertexArray(modelData->getVaoId());
@@ -73,6 +73,7 @@ void RenderManager::renderEntityFlat(BaseEntity* t_entity, FlatShader* t_shader)
 	t_shader->loadViewMatrix(MathHelper::createViewMatrix(WindowManager::GetInstance()->getCamera()));
 	t_shader->loadColor(t_entity->getComponent<ColorComponent>()->getColor());
 
+	glShadeModel(GL_FLAT);
 	glDrawArrays(GL_TRIANGLES, 0, modelData->getVertexCount());
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

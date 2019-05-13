@@ -2,6 +2,7 @@
 #define	SINGLETON_H
 #include <cstddef>
 #include "iostream"
+#include <mutex>
 
 template<class T>
 class TSingleton {

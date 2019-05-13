@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseEntity.h"
-#include "Model.h"
+#include "ModelData.h"
+#include "TextureData.h"
 
 class SphereFactory
 {
@@ -11,6 +12,7 @@ public:
 	BaseEntity* makeSphere();
 
 private:
-	Model* m_sphere_model;
+	ModelData* m_sphere_model;
+	TextureData* m_sphere_texture;
 };
 

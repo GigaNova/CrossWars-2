@@ -8,10 +8,12 @@
 #include <ctime>
 #include "Color.h"
 #include "ColorComponent.h"
+#include "TextureComponent.h"
 
 SphereFactory::SphereFactory()
 {
-	m_sphere_model = ModelManager::GetInstance()->loadModel();
+	m_sphere_model = ModelManager::GetInstance()->loadObj("sphere");
+	m_sphere_texture = ModelManager::GetInstance()->loadTexture("grey.png");
 }
 
 SphereFactory::~SphereFactory()
@@ -32,6 +34,7 @@ BaseEntity* SphereFactory::makeSphere()
 	entity->addComponent(new RotationComponent(rot(rng), rot(rng), rot(rng)));
 	entity->addComponent(new ScaleComponent(scale(rng)));
 	entity->addComponent(new MeshComponent(m_sphere_model));
+	entity->addComponent(new TextureComponent(m_sphere_texture));
 	//entity->addComponent(new ColorComponent(Color::fromRgb(255, 0, 255)));
 
 	return entity;

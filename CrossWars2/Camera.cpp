@@ -109,8 +109,16 @@ void Camera::rotate(SDL_MouseButtonEvent* t_button)
 
 		m_yaw += mouseDelta.x;
 		m_pitch -= mouseDelta.y;
-	}
 
+		if(m_pitch > 90)
+		{
+			m_pitch = 90;
+		}
+		else if(m_pitch < -90)
+		{
+			m_pitch = -90;
+		}
+	}
 }
 
 void Camera::debug()

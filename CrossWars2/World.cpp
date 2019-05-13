@@ -10,34 +10,30 @@
 #include "CubeMarcher.h"
 #include "ColorComponent.h"
 #include "Color.h"
+#include "ChunkManager.h"
+#include "ChunkSystem.h"
+#include "RenderSystem.h"
 
 World::World()
 {	
-	/*SphereFactory factory;
+	SphereFactory factory;
 	for(int i = 0; i < 100; ++i)
 	{
 		auto sphere = factory.makeSphere();
 		m_entity_vector.push_back(sphere);
-	}*/
+	}
 
-	m_cube_marcher = new CubeMarcher();
-
-	for(int i = 0; i < 20; ++i)
+	for (int i = -5; i < 5; ++i)
 	{
-		for(int j = 0; j < 20; ++j)
+		for (int j = -5; j < 5; ++j)
 		{
-			auto terrain = m_cube_marcher->generateChunk(i * 30, 0, j * 30, 30, 30, 30);
-
-			terrain->addComponent(new PositionComponent(0, 0, 0));
-			terrain->addComponent(new RotationComponent(0, 0, 0));
-			terrain->addComponent(new ScaleComponent(2.0));
-			terrain->addComponent(new ColorComponent(Color::fromHex("006666")));
-
-			m_entity_vector.push_back(terrain);
+			m_chunk_manager.createChunk(i * ChunkData::CHUNK_SIZE_X, 0, j * ChunkData::CHUNK_SIZE_Z, ChunkData::CHUNK_SIZE_X, ChunkData::CHUNK_SIZE_Y, ChunkData::CHUNK_SIZE_Z);
 		}
 	}
 
 	//m_system_vector.push_back(new PhysicsSystem());
+	m_system_vector.push_back(new ChunkSystem(&m_chunk_manager));
+	m_system_vector.push_back(new RenderSystem());
 }
 
 World::~World()
@@ -46,6 +42,12 @@ World::~World()
 
 void World::preUpdate()
 {
+	for(auto chunk : m_chunk_manager.getNewChunks())
+	{
+		const auto newChunk = m_chunk_manager.handleChunk(chunk);
+		m_entity_vector.push_back(newChunk);
+	}
+
 	for(auto component : *ComponentManager::GetInstance()->getComponents())
 	{
 		for (System* system : m_system_vector)

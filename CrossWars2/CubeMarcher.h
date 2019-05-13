@@ -5,17 +5,21 @@
 #include <GLM/gtx/compatibility.hpp>
 #include "CubeTerrain.h"
 #include "FastNoise.h"
+#include "TerrainChunk.h"
+#include "ChunkData.h"
 
 typedef std::vector<std::vector<std::vector<glm::float4>>> ScalarField;
 
 class CubeMarcher
 {
 public:
-	CubeMarcher();
+	const double PERLIN_WEAKNESS = 1.25;
+
+	CubeMarcher(int t_seed);
 	~CubeMarcher();
 
-	CubeTerrain* generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
-	ModelData* generateMesh(const ScalarField& t_scalar_field, int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
+	TerrainChunk* generateChunk(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
+	ChunkData* generateMesh(const ScalarField& t_scalar_field, int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
 private:
 	ScalarField initializeField(int t_offset_x, int t_offset_y, int t_offset_z, int t_width, int t_height, int t_depth);
 
@@ -34,9 +38,7 @@ private:
 
 	FastNoise m_noiseGen;
 
-	double m_scalar_max;
 	double m_scalar_median;
-	double m_scalar_min;
 
 	GLint m_edge_table[256] = {
 		0x0  , 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,

@@ -3,8 +3,8 @@
 #include "ModelData.h"
 #include <GLEW/glew.h>
 #include <vector>
-#include "Model.h"
 #include "ObjFormatLoader.h"
+#include "TextureData.h"
 
 class ModelManager : public TSingleton<ModelManager>
 {
@@ -14,7 +14,7 @@ public:
 
 	void cleanUp();
 
-	Model* loadModel();
+	ModelData* loadObj(const char* t_name);
 	ModelData* loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLuint> t_indices, std::vector<GLfloat> t_normals, std::vector<GLfloat> t_texture_coords);
 	ModelData* loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLfloat> t_normals);
 	TextureData* loadTexture(std::string t_filename);

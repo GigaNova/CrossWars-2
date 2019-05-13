@@ -61,6 +61,9 @@
     <Filter Include="Game\World">
       <UniqueIdentifier>{c4daf8ce-30e0-4c67-af5e-4945ccc38d9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Threading">
+      <UniqueIdentifier>{3e3c75b0-d3e8-4ecc-bded-b58b41d42f49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossWars2.cpp">
@@ -94,9 +97,6 @@
       <Filter>Engine\Shaders</Filter>
     </ClCompile>
     <ClCompile Include="TextureData.cpp">
-      <Filter>Engine\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
       <Filter>Engine\Models</Filter>
     </ClCompile>
     <ClCompile Include="MathHelper.cpp">
@@ -183,8 +183,29 @@
     <ClCompile Include="FastNoise.cpp">
       <Filter>Helpers\Noise</Filter>
     </ClCompile>
+    <ClCompile Include="ChunkManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Engine\Threading</Filter>
+    </ClCompile>
     <ClCompile Include="CubeTerrain.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainChunk.cpp">
+      <Filter>Engine\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkSystem.cpp">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkData.cpp">
+      <Filter>Game\World</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureComponent.cpp">
+      <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +249,6 @@
       <Filter>Engine\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="TextureData.h">
-      <Filter>Engine\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
       <Filter>Engine\Models</Filter>
     </ClInclude>
     <ClInclude Include="MathHelper.h">
@@ -317,8 +335,29 @@
     <ClInclude Include="FastNoise.h">
       <Filter>Helpers\Noise</Filter>
     </ClInclude>
+    <ClInclude Include="ChunkManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Engine\Threading</Filter>
+    </ClInclude>
     <ClInclude Include="CubeTerrain.h">
-      <Filter>Header Files</Filter>
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainChunk.h">
+      <Filter>Engine\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkData.h">
+      <Filter>Game\World</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Engine\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,15 +15,14 @@ public:
 
 	void getInput();
 	void update();
-	void render();
+	void prepareRender();
+	void swapWindow();
 	void cleanUp();
 
 	bool isRunning();
 private:
 	bool m_is_running;
 
-	StandardShader* m_standard_shader;
-	FlatShader* m_flat_shader;
 	World* m_world;
 	bool m_dragging;
 };

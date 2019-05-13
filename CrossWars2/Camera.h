@@ -38,7 +38,7 @@ public:
 
 	void debug();
 private:
-	const float SPEED = 150.f;
+	const float SPEED = 350.f;
 
 	CameraType m_type;
 

@@ -37,12 +37,9 @@ ModelData* ModelManager::loadModelToVao(std::vector<GLfloat> t_vertex_positions,
 	return new ModelData(id, t_vertex_positions.size() / 3);
 }
 
-Model* ModelManager::loadModel()
+ModelData* ModelManager::loadObj(const char* t_name)
 {
-	auto textureData = loadTexture("uv.png");
-	auto modelData = m_obj_loader.loadModel("sphere");
-
-	return new Model(modelData, textureData);
+	return m_obj_loader.loadModel(t_name);
 }
 
 TextureData* ModelManager::loadTexture(std::string t_filename)

@@ -1,16 +1,16 @@
 #pragma once
-#include "Model.h"
 #include "Component.h"
+#include "ModelData.h"
 
 class MeshComponent : public Component
 {
 public:
-	MeshComponent(Model* t_model);
+	MeshComponent(ModelData* t_model);
 	~MeshComponent();
 
-	void setModel(Model* t_model);
-	Model* getModel();
+	void setModel(ModelData* t_model);
+	ModelData* getModel();
 private:
-	Model* m_model;
+	ModelData* m_model;
 };
 

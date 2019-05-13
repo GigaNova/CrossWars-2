@@ -15,8 +15,9 @@ int main(int argc, char *argv[])
 	while(engineInstance->isRunning())
 	{
 		engineInstance->getInput();
+		engineInstance->prepareRender();
 		engineInstance->update();
-		engineInstance->render();
+		engineInstance->swapWindow();
 		DeltaTime::GetInstance()->update();
 	}
 

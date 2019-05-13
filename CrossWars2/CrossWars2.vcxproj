@@ -29,13 +29,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>Intel C++ Compiler 19.0</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>Intel C++ Compiler 19.0</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseIntelTBB>true</UseIntelTBB>
@@ -43,13 +43,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>Intel C++ Compiler 19.0</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>Intel C++ Compiler 19.0</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -163,6 +163,9 @@
   <ItemGroup>
     <ClCompile Include="BaseEntity.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ChunkData.cpp" />
+    <ClCompile Include="ChunkManager.cpp" />
+    <ClCompile Include="ChunkSystem.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorComponent.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -181,7 +184,6 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MathHelper.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
-    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelData.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="MouseManager.cpp" />
@@ -190,6 +192,7 @@
     <ClCompile Include="PositionComponent.cpp" />
     <ClCompile Include="ProtoShader.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="RotationComponent.cpp" />
     <ClCompile Include="ScaleComponent.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
@@ -197,7 +200,10 @@
     <ClCompile Include="StandardShader.cpp" />
     <ClCompile Include="StaticLight.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="TerrainChunk.cpp" />
+    <ClCompile Include="TextureComponent.cpp" />
     <ClCompile Include="TextureData.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="WindowManager.cpp" />
@@ -206,6 +212,9 @@
   <ItemGroup>
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ChunkData.h" />
+    <ClInclude Include="ChunkManager.h" />
+    <ClInclude Include="ChunkSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorComponent.h" />
     <ClInclude Include="Component.h" />
@@ -225,7 +234,6 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="MeshComponent.h" />
-    <ClInclude Include="Model.h" />
     <ClInclude Include="ModelData.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="MouseManager.h" />
@@ -234,6 +242,7 @@
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="ProtoShader.h" />
     <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="RotationComponent.h" />
     <ClInclude Include="ScaleComponent.h" />
     <ClInclude Include="SDLHelpers.h" />
@@ -243,7 +252,10 @@
     <ClInclude Include="StandardShader.h" />
     <ClInclude Include="StaticLight.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="TerrainChunk.h" />
+    <ClInclude Include="TextureComponent.h" />
     <ClInclude Include="TextureData.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="VelocityComponent.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="WindowManager.h" />
