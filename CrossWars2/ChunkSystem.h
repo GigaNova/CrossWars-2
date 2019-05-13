@@ -5,6 +5,9 @@
 class ChunkSystem : public System
 {
 public:
+	const static int VIEW_DISTANCE = 12;
+	constexpr static float UPDATE_INTERVAL = 0.5;
+
 	ChunkSystem(ChunkManager* t_chunk_manager);
 	~ChunkSystem();
 
@@ -13,5 +16,7 @@ public:
 
 private:
 	ChunkManager* m_chunk_manager;
+
+	float m_counter;
 };
 

@@ -12,7 +12,7 @@
 CubeMarcher::CubeMarcher(int t_seed)
 {
 	m_noiseGen.SetSeed(t_seed);
-	m_noiseGen.SetFractalOctaves(4);
+	m_noiseGen.SetFractalOctaves(8);
 }
 
 CubeMarcher::~CubeMarcher()

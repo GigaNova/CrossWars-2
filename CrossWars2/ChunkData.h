@@ -5,10 +5,10 @@
 class ChunkData
 {
 public:
-	const static int CHUNK_SIZE_X = 64;
+	const static int CHUNK_SIZE_X = 16;
 	const static int CHUNK_SIZE_Y = 64;
-	const static int CHUNK_SIZE_Z = 64;
-	const static int CHUNK_SCALE = 1.0;
+	const static int CHUNK_SIZE_Z = 16;
+	const static int CHUNK_SCALE = 2.0;
 
 	ChunkData(const std::vector<GLfloat>& t_vertices, const std::vector<GLfloat>& t_normals);
 	~ChunkData();
