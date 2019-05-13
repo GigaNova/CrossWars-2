@@ -13,6 +13,7 @@ public:
 
 	void preUpdate();
 	void update(double t_delta_time);
+	void postUpdate();
 
 	std::vector<BaseEntity*>* getEntities();
 private:

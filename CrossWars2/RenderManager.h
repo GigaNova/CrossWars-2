@@ -12,6 +12,9 @@ public:
 	RenderManager();
 	~RenderManager();
 
+	void bindFrameBuffer(const GLuint t_buffer_fbo, const GLuint t_buffer_texture);
+	void unbindFrameBuffer();
+
 	void renderEntity(BaseEntity* t_entity, StandardShader* t_shader);
 	void renderEntityFlat(BaseEntity* t_entity, FlatShader* t_shader);
 };

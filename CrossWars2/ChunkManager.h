@@ -14,6 +14,7 @@ public:
 
 	bool chunkExists(int t_x, int t_z);
 	std::vector<TerrainChunk*> getNewChunks();
+	void cleanChunks();
 private:
 	int m_world_seed;
 

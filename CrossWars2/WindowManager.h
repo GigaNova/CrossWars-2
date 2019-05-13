@@ -14,7 +14,7 @@ public:
 	Camera* getCamera();
 	SDL_Window* getRenderWindow();
 private:
-	const char* game_name = "Cross Wars 2";
+	const char* m_game_name = "Truce of Twilight";
 
 	Camera* m_camera;
 

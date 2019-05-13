@@ -87,6 +87,29 @@ TextureData* ModelManager::loadTexture(std::string t_filename)
 	return new TextureData(textureId);
 }
 
+GLuint ModelManager::createShadowMap()
+{
+	GLuint depthMapFBO;
+	glGenFramebuffers(1, &depthMapFBO);
+
+	return depthMapFBO;
+}
+
+GLuint ModelManager::createDepthBufferAttachment()
+{
+	GLuint depthMap;
+	glGenTextures(1, &depthMap);
+
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	return depthMap;
+}
+
 GLuint ModelManager::createVao()
 {
 	GLuint vaoID;

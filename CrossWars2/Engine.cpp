@@ -74,6 +74,7 @@ void Engine::update()
 {
 	m_world->preUpdate();
 	m_world->update(DeltaTime::GetInstance()->getDeltaTime());
+	m_world->postUpdate();
 }
 
 void Engine::prepareRender()

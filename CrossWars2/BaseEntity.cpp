@@ -12,6 +12,11 @@ BaseEntity::BaseEntity()
 
 BaseEntity::~BaseEntity()
 {
+	for (auto component : m_components)
+	{
+		ComponentManager::GetInstance()->removeComponent(component.second);
+		delete component.second;
+	}
 }
 
 void BaseEntity::addComponent(Component* t_component)

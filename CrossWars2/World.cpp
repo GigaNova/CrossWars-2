@@ -68,6 +68,11 @@ void World::update(double t_delta_time)
 	}
 }
 
+void World::postUpdate()
+{
+	m_chunk_manager.cleanChunks();
+}
+
 std::vector<BaseEntity*>* World::getEntities()
 {
 	return &m_entity_vector;

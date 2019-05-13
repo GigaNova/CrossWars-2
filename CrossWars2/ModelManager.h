@@ -18,6 +18,9 @@ public:
 	ModelData* loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLuint> t_indices, std::vector<GLfloat> t_normals, std::vector<GLfloat> t_texture_coords);
 	ModelData* loadModelToVao(std::vector<GLfloat> t_vertex_positions, std::vector<GLfloat> t_normals);
 	TextureData* loadTexture(std::string t_filename);
+
+	GLuint createShadowMap();
+	GLuint createDepthBufferAttachment();
 private:
 	GLuint createVao();
 	void storeData(int t_attribute_num, int t_coord_size, std::vector<GLfloat> t_data);

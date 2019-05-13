@@ -9,7 +9,7 @@
 #include "TerrainChunk.h"
 #include "ChunkData.h"
 
-CubeMarcher::CubeMarcher(int t_seed)
+CubeMarcher::CubeMarcher(int t_seed) : m_seed(t_seed)
 {
 	m_noiseGen.SetSeed(t_seed);
 	m_noiseGen.SetFractalOctaves(8);
@@ -65,7 +65,7 @@ ScalarField CubeMarcher::initializeField(int t_offset_x, int t_offset_y, int t_o
 				double noise = m_noiseGen.GetNoise(i, j, k) + (j * 0.0155) - 0.3;
 
 				m_noiseGen.SetNoiseType(FastNoise::Perlin);
-				noise += (m_noiseGen.GetNoise(i, j, k) + (j * 0.055) - 0.3) / PERLIN_WEAKNESS;
+				noise += (m_noiseGen.GetNoise(i, j, k) + (j * (abs(sin(m_seed)) / 20)) - 0.3) / PERLIN_WEAKNESS;
 
 				if (j == 0) noise = 0;
 

@@ -22,6 +22,21 @@ RenderManager::~RenderManager()
 {
 }
 
+void RenderManager::bindFrameBuffer(const GLuint t_buffer_fbo, const GLuint t_buffer_texture)
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, t_buffer_fbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, t_buffer_texture, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void RenderManager::unbindFrameBuffer()
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, 1024, 768);
+}
+
 void RenderManager::renderEntity(BaseEntity* t_entity, StandardShader* t_shader)
 {
 	auto modelData = t_entity->getComponent<MeshComponent>()->getModel();
