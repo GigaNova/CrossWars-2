@@ -213,6 +213,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\AppData\Local\Temp\Rar$DRa37216.32326\concurrentqueue-master\concurrentqueue.h" />
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ChunkData.h" />

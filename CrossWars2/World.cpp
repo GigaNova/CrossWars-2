@@ -42,9 +42,10 @@ World::~World()
 
 void World::preUpdate()
 {
-	for(auto chunk : m_chunk_manager.getNewChunks())
+	TerrainChunk* newChunkData;
+	while(m_chunk_manager.getChunkQueue()->try_dequeue(newChunkData))
 	{
-		const auto newChunk = m_chunk_manager.handleChunk(chunk);
+		const auto newChunk = m_chunk_manager.handleChunk(newChunkData);
 		m_entity_vector.push_back(newChunk);
 	}
 

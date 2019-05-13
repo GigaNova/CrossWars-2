@@ -359,5 +359,8 @@
     <ClInclude Include="RenderSystem.h">
       <Filter>Engine\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\AppData\Local\Temp\Rar$DRa37216.32326\concurrentqueue-master\concurrentqueue.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

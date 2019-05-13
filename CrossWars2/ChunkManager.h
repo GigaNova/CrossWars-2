@@ -2,6 +2,7 @@
 #include "CubeMarcher.h"
 #include "ThreadPool.h"
 #include <map>
+#include "concurrentqueue.h"
 
 class ChunkManager
 {
@@ -13,7 +14,7 @@ public:
 	CubeTerrain* handleChunk(TerrainChunk* t_chunk);
 
 	bool chunkExists(int t_x, int t_z);
-	std::vector<TerrainChunk*> getNewChunks();
+	moodycamel::ConcurrentQueue<TerrainChunk*>* getChunkQueue();
 	void cleanChunks();
 private:
 	int m_world_seed;
@@ -25,5 +26,7 @@ private:
 	std::vector<glm::vec2> m_jobs;
 
 	std::mutex m_lock;
+
+	moodycamel::ConcurrentQueue<TerrainChunk*> m_terrain_queue;
 };
 

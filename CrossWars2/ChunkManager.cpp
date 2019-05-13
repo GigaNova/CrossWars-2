@@ -27,7 +27,8 @@ void ChunkManager::createChunk(int t_offset_x, int t_offset_y, int t_offset_z, i
 	{
 		CubeMarcher marcher(m_world_seed);
 		auto chunk = marcher.generateChunk(t_offset_x, t_offset_y, t_offset_z, t_width, t_height, t_depth);
-		m_new_chunks.push_back(chunk);
+
+		m_terrain_queue.enqueue(chunk);
 	});
 
 	m_jobs.push_back(glm::vec2(x, z));
@@ -82,11 +83,9 @@ bool ChunkManager::chunkExists(int t_x, int t_z)
 	return false;
 }
 
-std::vector<TerrainChunk*> ChunkManager::getNewChunks()
+moodycamel::ConcurrentQueue<TerrainChunk*>* ChunkManager::getChunkQueue()
 {
-	auto vector = m_new_chunks;
-	m_new_chunks.clear();
-	return vector;
+	return &m_terrain_queue;
 }
 
 void ChunkManager::cleanChunks()
@@ -120,6 +119,8 @@ void ChunkManager::cleanChunks()
 		const int chunkZ = floor(offset.z / ChunkData::CHUNK_SIZE_Z);
 
 		const int dist = sqrt(pow(chunkX - cameraX, 2) + pow(chunkZ - cameraZ, 2));
+
+		std::cout << dist << std::endl;
 
 		if(dist >= ChunkSystem::VIEW_DISTANCE * 2)
 		{
